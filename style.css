@@ -1,0 +1,71 @@
+* {
+    box-sizing: border-box;
+    font-family: "Merriweather", serif;
+}
+
+body {
+    margin: 0;
+}
+
+header, main{
+    margin: 50px;
+}
+
+section {
+    margin: 40px 0;
+}
+
+.nav_line {
+    list-style: none;
+    padding: 0;
+}
+
+.nav_line > li {
+    display: inline;
+    margin-right: 10px;
+}
+
+a, a:visited {
+    text-decoration: none;
+    outline: none;
+    color: inherit;
+}
+
+a:hover {
+    color: darkorange;
+    transition:0.2s;
+}
+
+.food {
+    height: 600px;
+    text-align: left;
+    margin-left: 0;
+}
+
+.food > img {
+    height: 100%;
+}
+
+p, ul, table, nav {
+    font-size: larger;
+    font-weight: 400;
+}
+
+table, td, th {
+    padding: 10px;
+    border: 2px, solid, black;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 30px 50px;
+}
+
+#phone {
+    font-family: "Lato", sans-serif;
+    font-size: large;
+}
