@@ -1,0 +1,146 @@
+* {
+    box-sizing: border-box;
+    font-family: "Merriweather", serif;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header, main{
+    margin: 0 50px;
+}
+
+main {
+    margin-bottom: 40px;
+}
+
+.nav_line {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.active-link {
+    color: darkorange !important;
+}
+
+a, a:visited {
+    text-decoration: none;
+    outline: none;
+    color: inherit;
+}
+
+a:hover {
+    color: darkorange;
+    transition:0.2s;
+}
+
+.dishes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    justify-items: stretch;
+}
+
+.dish-card {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid transparent;
+    padding: 30px 40px;
+    border-radius: 35px;
+    cursor: pointer;
+    filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
+    background-color: white;
+}
+
+.dish-card:hover {
+    border: 2px, solid, darkorange;
+    box-sizing: content-box;
+    transition: 0.2s;
+}
+
+.dish-card:hover button {
+    background-color: lightgray;
+}
+
+.dish-card img {
+    width: 100%;
+    border-radius: 35px;
+}
+
+.dish-card * {
+    margin: 5px 0;
+}
+
+.dish-card button {
+    margin-top: 15px;
+    background-color: #f1eee9;
+    padding: 10px 30px;
+    border: black;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.name {
+    flex-grow: 1;
+}
+
+.prop {
+    font-size: medium;
+    color: gray;
+}
+
+p, ul, nav {
+    font-size: larger;
+    font-weight: 400;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 30px 50px;
+    margin-top: auto;
+}
+
+#phone {
+    font-family: "Lato", sans-serif;
+    font-size: large;
+}
+
+@media all and (max-width: 800px) {
+    .dishes {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .nav_line {
+        justify-content: space-between;
+    }
+}
+
+@media all and (max-width: 600px) {
+    h1 {
+        text-align: center;
+    }
+
+    .nav_line {
+        flex-direction: column;
+        align-content: center;
+        font-size: calc(100% + 4px);
+    }
+
+    section > h2 {
+        text-align: center;
+    }
+
+    .dishes {
+        grid-template-columns: 1fr;
+    }
+}

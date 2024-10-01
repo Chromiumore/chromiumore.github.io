@@ -5,24 +5,30 @@
 
 body {
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header, main{
-    margin: 50px;
+    margin: 0 50px;
 }
 
 section {
     margin: 40px 0;
 }
 
+.active-link {
+    color: darkorange !important;
+}
+
 .nav_line {
     list-style: none;
     padding: 0;
-}
-
-.nav_line > li {
-    display: inline;
-    margin-right: 10px;
+    display: flex;
+    gap: 15px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
 a, a:visited {
@@ -62,10 +68,49 @@ footer {
     background-color: black;
     color: white;
     margin: 0;
+    margin-top: auto;
     padding: 30px 50px;
 }
 
 #phone {
     font-family: "Lato", sans-serif;
     font-size: large;
+}
+
+@media all and (max-width: 800px) {
+    #about {
+        width: 500px;
+    }
+
+    .nav_line {
+        justify-content: space-between;
+    }
+}
+
+@media all and (max-width: 600px) {
+    h1 {
+        text-align: center;
+    }
+
+    .nav_line {
+        flex-direction: column;
+        align-content: center;
+        font-size: calc(100% + 4px);
+    }
+    
+    .food img {
+        width: 100%;
+    }
+
+    table {
+        font-size: calc(100% - 2px);
+    }
+
+}
+
+@media all and (max-width: 400px) {
+    
+    table {
+        font-size: calc(100% - 4px);
+    }
 }
