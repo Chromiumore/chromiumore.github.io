@@ -106,6 +106,78 @@
                 </div>
             </div>
         </section>
+        <form action="https://httpbin.org/post" method="post">
+            <h2>Сделать заказ</h2>
+            <div class="form-container">
+                <section class="form-section">
+                    <h3>Ваш заказ</h3>
+                    <label for="soup-selector">Суп</label>
+                    <select id="soup-selector" name="soup" required>
+                        <option value="" disabled selected hidden>-- Выберите суп --</option>
+                        <option value="gaspacho">Гаспачо</option>
+                        <option value="mushroom_soup">Грибной суп-пюре</option>
+                        <option value="norwegian_soup">Норвежский суп</option>
+                    </select>
+                    <label for="main-selector">Главное блюдо</label>
+                    <select id="main-selector" name="main-course" required>
+                        <option value="" disabled selected hidden>-- Выберите главное блюдо --</option>
+                        <option value="fried_potatoes">Жареная картошка с грибами</option>
+                        <option value="lasagna">Лазанья</option>
+                        <option value="chicken_cutlets">Котлеты из курицы с картофельным пюре</option>
+                    </select>
+                    <label for="beverege-selector">Напиток</label>
+                    <select id="beverege-selector" name="baverege" required>
+                        <option value="" disabled selected hidden>-- Выберите напиток --</option>
+                        <option value="orange_juice">Апельсиновый сок</option>
+                        <option value="apple_juice">Яблочный сок</option>
+                        <option value="carrot_juice">Морковный сок</option>
+                    </select>
+                    <label for="comment">Комментарий к заказу</label>
+                    <textarea id="comment" name="comment"></textarea>  
+                </section>
+                <section class="form-section">
+                    <h3>Ваши данные</h3>
+                    
+                    <label for="name-input">Имя</label>
+                    <input type="text" id="name-input" name="client-name" required>
+
+                    <label for="email-input">Email</label>
+                    <input type="email" id="email-input" name="email" required>
+
+                    <div>
+                        <input type="checkbox" id="news-checkbox" name="get-news" checked>
+                        <label for="news-checkbox">Получать информацию о скидках и акциях</label>
+                    </div>
+
+                    <label for="phone-input">Номер телефона</label>
+                    <input type="text" id="phone-input" name="phone" required>
+
+                    <label for="address-input">Адрес доставки</label>
+                    <input type="text" id="address-input" name="address" required>
+                    <p class="details">Доставка осуществляется только по москве</p>
+
+                    <p>Время доставки</p>
+
+                    <div>
+                        <input type="radio" name="delivery" id="delivery-fast" value="fast" required>
+                        <label for="delivery-fast">Как можно скорее</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" name="delivery" id="delivery-time" value="time">
+                        <label for="delivery-time">К указанному времени</label>
+                    </div>
+                    
+                    <label for="time">Укажите время доставки</label>
+                    <input type="time" name="time" id="time" min="07:00" max="23:00" step="300">
+                    <p class="details">Доступное время доставки с 7:00 до 23:00</p>
+                    <div class="form-buttons">
+                        <button type="reset">Сбросить</button>
+                        <button type="submit">Отправить</button>
+                    </div> 
+                </section>
+            </div>
+        </form>
     </main>
     <footer id="contacts">
             <p>Позвонить нам: <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" id="phone">+7-000-000-00-00</a></p>
