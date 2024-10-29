@@ -110,6 +110,10 @@ form h2 {
     text-align: center;
 }
 
+#order-price {
+    font-size: 25px;
+}
+
 .form-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -143,6 +147,10 @@ form h2 {
     width: 80%;
 }
 
+fieldset {
+    border: 0;
+}
+
 .form-section div input {
     height: auto;
     width: auto;
@@ -154,7 +162,8 @@ form h2 {
 
 .form-section textarea {
     margin-top: 5px;
-    height: 175px;
+    height: 30%;
+    width: 80%;
 }
 
 #news-checkbox {
