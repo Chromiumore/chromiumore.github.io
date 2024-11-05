@@ -42,6 +42,23 @@ a:hover {
     transition:0.2s;
 }
 
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.filters button {
+    border: solid transparent;
+    border-radius: 10px;
+    background-color: white;
+    color: forestgreen;
+}
+
+.filters button:hover, .active {
+    background-color: lightgreen !important;
+}
+
 .dishes {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

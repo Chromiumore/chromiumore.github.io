@@ -28,16 +28,48 @@
         </nav>
     </header>
     <main>
-        <section>
+        <section id="soup">
             <h2>Выберите суп</h2>
+            <div class="filters">
+                <button data-kind="fish">рыбный</button>
+                <button data-kind="meat">мясной</button>
+                <button data-kind="veg">вегетерианский</button>
+            </div>
             <div class="dishes"></div>
         </section>
-        <section>
+        <section id="main">
             <h2>Выберите главное блюдо</h2>
+            <div class="filters">
+                <button data-kind="fish">рыбное</button>
+                <button data-kind="meat">мясное</button>
+                <button data-kind="veg">вегетерианское</button>
+            </div>
             <div class="dishes"></div>
         </section>
-        <section>
+        <section id="salad_starter">
+            <h2>Выберите салат или стартер</h2>
+            <div class="filters">
+                <button data-kind="fish">рыбный</button>
+                <button data-kind="meat">мясной</button>
+                <button data-kind="veg">вегетерианский</button>
+            </div>
+            <div class="dishes"></div>
+        </section>
+        <section id="beverage">
             <h2>Выберите напиток</h2>
+            <div class="filters">
+                <button data-kind="cold">холодный</button>
+                <button data-kind="hot">горячий</button>
+            </div>
+            <div class="dishes"></div>
+        </section>
+        <section id="desert">
+            <h2>Выберите десерт</h2>
+            <div class="filters">
+                <button data-kind="small">маленькая порция</button>
+                <button data-kind="medium">средняя порция</button>
+                <button data-kind="large">большая порция</button>
+            </div>
             <div class="dishes"></div>
         </section>
         <form action="https://httpbin.org/post" method="post">
@@ -57,9 +89,17 @@
                         <p id="selected-main">Блюдо не выбрано</p>
                         <input type="text" id="main-value" name="main-course" value="" hidden>
 
+                        <p><b>Салат или стартер</b></p>
+                        <p id="selected-salad_starter">Блюдо не выбрано</p>
+                        <input type="text" id="salad_starter-value" name="salad_starter" value="" hidden>
+
                         <p><b>Напиток</b></p>
-                        <p id="selected-baverege">Блюдо не выбрано</p>
-                        <input type="text" id="baverege-value" name="baverege" value="" hidden>
+                        <p id="selected-beverage">Блюдо не выбрано</p>
+                        <input type="text" id="beverage-value" name="beverage" value="" hidden>
+
+                        <p><b>Главное блюдо</b></p>
+                        <p id="selected-dessert">Блюдо не выбрано</p>
+                        <input type="text" id="dessert-value" name="dessert" value="" hidden>
 
                         <p><b>Стоимость заказа</b></p>
                         <p id="order-price"><b>0&#8381;</b></p>

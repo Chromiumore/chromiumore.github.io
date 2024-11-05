@@ -1,7 +1,9 @@
 let order = {
     'soup': null,
     'main': null,
-    'baverege': null
+    'salad_starter': null,
+    'beverage': null,
+    'dessert':null
 };
 
 function calculatePrice() {
@@ -15,7 +17,8 @@ function calculatePrice() {
 }
 
 function updateOrder() {
-    if (order['soup'] || order['main'] || order['baverege']) {
+    if (order['soup'] || order['main'] || order['beverage']
+        || order['dessert'] || order['salad_starter']) {
         document.getElementById('selected-nothing').hidden = true;
         document.querySelector('.order').hidden = false;
         for (let el in order) {
@@ -52,6 +55,7 @@ function showDishes() {
 
         dishCard.classList.add('dish-card');
         dishCard.setAttribute('data-dish', dish.keyword);
+        dishCard.setAttribute('data-kind', dish.kind);
         dishCard.innerHTML = `
                     <img src='${dish.image}' alt='${dish.name}'>
                     <p class="price">${dish.price}₽</p>
@@ -71,8 +75,14 @@ function showDishes() {
         case 'main':
             sectionId = 1;
             break;
-        default:
+        case 'salad_starter':
             sectionId = 2;
+            break;
+        case 'beverage':
+            sectionId = 3;
+            break;
+        case 'dessert':
+            sectionId = 4;
             break;
         }
 
@@ -86,6 +96,19 @@ function resetOrder() {
     }
 
     updateOrder();
+
+    for (let filter of document.getElementsByClassName('filters')) {
+        for (let button of filter.children) {
+            button.classList.remove('active');
+        }
+    }
+
+    for (let section of document.querySelectorAll('.dishes')) {
+        for (let dish of section.children) {
+            dish.style.display = 'block';
+        }
+    }
+
     console.log('Order reseted successfully');
 }
 
@@ -100,6 +123,41 @@ function submitOrder() {
     }
 }
 
+function useFilter(event) {
+    
+}
+
+function activateFilters() {
+    let filters = document.getElementsByClassName('filters');
+    for (let filter of filters) {
+        for (let button of filter.children) {
+            button.addEventListener('click', function(event) {
+                let kind = event.target.getAttribute('data-kind');
+                let section = event.target.parentElement.parentElement;
+                let dishes = section.querySelector('.dishes');
+                for (let dish of dishes.children) {
+                    if (dish.getAttribute('data-kind') !== kind
+                    && !event.target.classList.contains('active')) {
+                        dish.style.display = 'none';
+                    } else {
+                        dish.style.display = 'block';
+                    }
+                }
+                
+                if (event.target.classList.contains('active')) {
+                    event.target.classList.remove('active');
+                } else {
+                    for (let i of event.target.parentElement.children) {
+                        i.classList.remove('active');
+                    }
+                    event.target.classList.add('active');
+                }
+            });
+        }
+    }    
+}
+
 document.addEventListener("DOMContentLoaded", showDishes);
 document.getElementById('reset').onclick = () => resetOrder();
 document.getElementById('submit').onclick = () => submitOrder();
+activateFilters();
