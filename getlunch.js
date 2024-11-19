@@ -1,10 +1,12 @@
 let order = {
     'soup': null,
-    'main': null,
-    'salad_starter': null,
-    'beverage': null,
+    'main-course': null,
+    'salad': null,
+    'drink': null,
     'dessert':null
 };
+
+let dishArray = [];
 
 function calculatePrice() {
     let sum = 0;
@@ -17,8 +19,8 @@ function calculatePrice() {
 }
 
 function updateOrder() {
-    if (order['soup'] || order['main'] || order['beverage']
-        || order['dessert'] || order['salad_starter']) {
+    if (order['soup'] || order['main-course'] || order['drink']
+        || order['dessert'] || order['salad']) {
         document.getElementById('selected-nothing').hidden = true;
         document.querySelector('.order').hidden = false;
         for (let el in order) {
@@ -49,6 +51,7 @@ function addDish(keyword) {
 function showDishes() {
     let sortedDishes = dishArray.sort((a, b) => a.name.localeCompare(b.name));
     let sections = document.querySelectorAll('.dishes');
+    console.log(dishArray[0]);
 
     for (let dish of sortedDishes) {
         let dishCard = document.createElement('div');
@@ -72,13 +75,13 @@ function showDishes() {
         case 'soup':
             sectionId = 0;
             break;
-        case 'main':
+        case 'main-course':
             sectionId = 1;
             break;
-        case 'salad_starter':
+        case 'salad':
             sectionId = 2;
             break;
-        case 'beverage':
+        case 'drink':
             sectionId = 3;
             break;
         case 'dessert':
@@ -89,6 +92,17 @@ function showDishes() {
         sections[sectionId].append(dishCard);
     }
 }
+
+async function loadDishes() {
+    let url = 'https://edu.std-900.ist.mospolytech.ru/labs/api/dishes';
+    const response = await fetch(url);
+    const json = await response.json();
+    console.log(json);
+    dishArray = json;
+    showDishes();
+}
+
+loadDishes();
 
 function resetOrder() {
     for (let el in order) {
@@ -112,6 +126,80 @@ function resetOrder() {
     console.log('Order reseted successfully');
 }
 
+function prepareNotification() {
+    let window = document.createElement('div');
+    window.classList.add('notification');
+
+    let message = document.createElement('p');
+    message.classList.add('notification-message');
+    window.appendChild(message);
+
+    let button = document.createElement('button');
+    button.textContent = 'Окей👌';
+    button.onclick = () => window.hidden = true;
+    window.appendChild(button);
+
+    document.body.appendChild(window);
+    window.hidden = true;
+    console.log('Notification prepeared');
+
+    return window;
+}
+
+function getNotificationMessage() {
+    isEmpty = true;
+    for (el in order) {
+        if (order[el] === null) {
+            isEmpty = false;
+            break;
+        }
+    }
+    if (isEmpty) {
+        return 'Ничего не выбрано. Выберите блюда для заказа';
+    }
+
+    if (order['drink'] === null) {
+        return 'Выберите напиток';
+    }
+
+    if (order['soup'] !== null
+        && order['main-course'] === null && order['salad'] === null) {
+        return 'Выберите блюдо/салат/стартер';
+    }
+
+    if (order['salad'] !== null
+        && order['main-course'] === null && order['soup'] === null) {
+        return 'Выберите суп или главное блюдо';
+    }
+
+    if ((order['drink'] !== null || order['dessert'] !== null)
+        && order['main-course'] === null && order['soup'] === null
+    && order['salad'] === null) {
+        return 'Выберите главное блюдо';
+    }
+
+    return '';
+}
+
+let notificationWindow = prepareNotification();
+
+function comboNotification() {
+    let message = getNotificationMessage();
+
+    if (message === '') {
+        return false;
+    }
+
+    let text
+    = document.getElementsByClassName('notification-message')[0];
+    console.log(text);
+    text.textContent = message;
+
+    notificationWindow.hidden = false;
+    console.log('show notification', message);
+    return true;
+}
+
 function submitOrder() {
     for (let el in order) {
         let value = document.getElementById(el + '-value');
@@ -121,6 +209,7 @@ function submitOrder() {
             value.value = '';
         }
     }
+    comboNotification();
 }
 
 function useFilter(event) {
