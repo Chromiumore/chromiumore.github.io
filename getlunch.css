@@ -108,7 +108,7 @@ a:hover {
     background-color: lightgreen !important;
 }
 
-.dishes {
+.dishes, .order-dishes{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
@@ -132,7 +132,7 @@ a:hover {
     transition: 0.2s;
 }
 
-.dish-card:hover button {
+.dish-card:hover button, .combo-link button:hover {
     background-color: lightgray;
 }
 
@@ -145,7 +145,7 @@ a:hover {
     margin: 5px 0;
 }
 
-.dish-card button {
+.dish-card button, .combo-link button {
     margin-top: 15px;
     background-color: #f1eee9;
     padding: 10px 30px;
@@ -317,4 +317,25 @@ footer {
     .dishes {
         grid-template-columns: 1fr;
     }
+}
+
+.selected-dish {
+    border: 2px, solid, darkorange;
+    box-sizing: content-box;
+}
+
+#components-nothing {
+    text-align: center;
+}
+
+.combo-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    height: 80px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.9);
+    padding: 0 20px;
+    bottom: 0;
 }

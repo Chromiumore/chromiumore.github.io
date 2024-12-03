@@ -1,57 +1,133 @@
-let order = {
-    'soup': null,
-    'main-course': null,
-    'salad': null,
-    'drink': null,
-    'dessert':null
-};
+// let order = {
+//     'soup': null,
+//     'main-course': null,
+//     'salad': null,
+//     'drink': null,
+//     'dessert':null
+// };
+
+let categories = ['soup', 'main-course', 'salad', 'drink', 'dessert'];
 
 let dishArray = [];
 
-function calculatePrice() {
-    let sum = 0;
-    for (let el in order) {
-        if (order[el]) {
-            sum += order[el].price;
-        }
-    }
-    document.getElementById('order-price').textContent = `${sum}₽`;
+function prepareComboPanel() {
+    let window = document.createElement('div');
+    window.classList.add('combo-panel');
+
+    let message = document.createElement('p');
+    message.classList.add('combo-price');
+    window.appendChild(message);
+
+    let button = document.createElement('button');
+    button.textContent = 'Перейти к оформлению';
+    button.disabled = true;
+    let link = document.createElement('a');
+    link.classList.add('combo-link');
+    link.href = 'getorder.html';
+    link.appendChild(button);
+    window.appendChild(link);
+
+    document.body.appendChild(window);
+    window.style.display = 'none';
+    console.log('Combo panel prepeared');
+
+    return window;
 }
 
-function updateOrder() {
-    if (order['soup'] || order['main-course'] || order['drink']
-        || order['dessert'] || order['salad']) {
-        document.getElementById('selected-nothing').hidden = true;
-        document.querySelector('.order').hidden = false;
-        for (let el in order) {
-            if (order[el]) {
-                let id = 'selected-' + order[el].category;
-                let text = order[el].name + ' ' + order[el].price + '₽';
-                document.getElementById(id).textContent = text;
-            }
+let panel = prepareComboPanel();
+
+function calculatePrice() {
+    let sum = 0;
+    for (let el of categories) {
+        let id = localStorage.getItem(el);
+        if (id) {
+            let dish = dishArray.find(dish => dish.id == id);
+            sum += dish.price;
         }
-    } else {
-        for (let el in order) {
-            let id = 'selected-' + el;
-            let text = 'Блюдо не выбрано';
-            document.getElementById(id).textContent = text;
-        }
-        document.getElementById('selected-nothing').hidden = false;
-        document.querySelector('.order').hidden = true;
     }
-    calculatePrice();
+    return sum;
+}
+
+function getNotificationMessage() {
+    isEmpty = true;
+    for (let el of categories) {
+        if (localStorage.getItem(el)) {
+            isEmpty = false;
+            break;
+        }
+    }
+    if (isEmpty) {
+        return 'Ничего не выбрано. Выберите блюда для заказа';
+    }
+
+    if (!localStorage.getItem('drink')) {
+        return 'Выберите напиток';
+    }
+
+    if (localStorage.getItem('soup')
+        && !localStorage.getItem('main-course')
+        && !localStorage.getItem('salad')) {
+        return 'Выберите блюдо/салат/стартер';
+    }
+
+    if (localStorage.getItem('salad')
+        && !localStorage.getItem('main-course')
+        && !localStorage.getItem('soup')) {
+        return 'Выберите суп или главное блюдо';
+    }
+
+    if ((localStorage.getItem('drink')
+        || localStorage.getItem('dessert'))
+        && !localStorage.getItem('main-course')
+        && !localStorage.getItem('soup')
+        && !localStorage.getItem('salad')) {
+        return 'Выберите главное блюдо';
+    }
+
+    return '';
+}
+
+function checkCombo() {
+    let price = calculatePrice();
+    document.querySelector('.combo-price').textContent = 'Итого: ' + price;
+
+    if (localStorage.getItem('soup') || localStorage.getItem('main-course')
+        || localStorage.getItem('drink') || localStorage.getItem('dessert')
+        || localStorage.getItem('salad')) {
+        document.querySelector('.combo-panel').style.display = 'flex';
+    }
+
+    let message = getNotificationMessage();
+    let button = document.querySelector('.combo-link').firstChild;
+    if (message === '') {
+        button.disabled = false;
+    } else {
+        button.disabled = true;
+    }
 }
 
 function addDish(keyword) {
-    let dish = dishArray.find(dish => dish.keyword === keyword);
-    order[dish.category] = dish;
-    updateOrder();
+    let dish = dishArray.find(dish => dish.keyword == keyword);
+    localStorage.setItem(dish.category, dish.id);
+    checkCombo();
+}
+
+function manageSelected(dishCard) {
+    let cards = dishCard.parentElement.children;
+    for (let el of cards) {
+        el.classList.remove('selected-dish');
+    }
+    dishCard.classList.add('selected-dish');
+}
+
+function buttonPressed(dishCard) {
+    manageSelected(dishCard);
+    addDish(dishCard.getAttribute('data-dish'));
 }
 
 function showDishes() {
     let sortedDishes = dishArray.sort((a, b) => a.name.localeCompare(b.name));
     let sections = document.querySelectorAll('.dishes');
-    console.log(dishArray[0]);
 
     for (let dish of sortedDishes) {
         let dishCard = document.createElement('div');
@@ -68,7 +144,7 @@ function showDishes() {
         
         dishCard.querySelector('button').onclick = (
             
-        ) => addDish(dishCard.getAttribute('data-dish'));
+        ) => buttonPressed(dishCard);
 
         let sectionId;
         switch (dish.category) {
@@ -90,7 +166,12 @@ function showDishes() {
         }
 
         sections[sectionId].append(dishCard);
+
+        if (localStorage.getItem(dish.category) == dish.id) {
+            manageSelected(dishCard);
+        }
     }
+    checkCombo();
 }
 
 async function loadDishes() {
@@ -103,118 +184,6 @@ async function loadDishes() {
 }
 
 loadDishes();
-
-function resetOrder() {
-    for (let el in order) {
-        order[el] = null;
-    }
-
-    updateOrder();
-
-    for (let filter of document.getElementsByClassName('filters')) {
-        for (let button of filter.children) {
-            button.classList.remove('active');
-        }
-    }
-
-    for (let section of document.querySelectorAll('.dishes')) {
-        for (let dish of section.children) {
-            dish.style.display = 'block';
-        }
-    }
-
-    console.log('Order reseted successfully');
-}
-
-function prepareNotification() {
-    let window = document.createElement('div');
-    window.classList.add('notification');
-
-    let message = document.createElement('p');
-    message.classList.add('notification-message');
-    window.appendChild(message);
-
-    let button = document.createElement('button');
-    button.textContent = 'Окей👌';
-    button.onclick = () => window.hidden = true;
-    window.appendChild(button);
-
-    document.body.appendChild(window);
-    window.hidden = true;
-    console.log('Notification prepeared');
-
-    return window;
-}
-
-function getNotificationMessage() {
-    isEmpty = true;
-    for (el in order) {
-        if (order[el] === null) {
-            isEmpty = false;
-            break;
-        }
-    }
-    if (isEmpty) {
-        return 'Ничего не выбрано. Выберите блюда для заказа';
-    }
-
-    if (order['drink'] === null) {
-        return 'Выберите напиток';
-    }
-
-    if (order['soup'] !== null
-        && order['main-course'] === null && order['salad'] === null) {
-        return 'Выберите блюдо/салат/стартер';
-    }
-
-    if (order['salad'] !== null
-        && order['main-course'] === null && order['soup'] === null) {
-        return 'Выберите суп или главное блюдо';
-    }
-
-    if ((order['drink'] !== null || order['dessert'] !== null)
-        && order['main-course'] === null && order['soup'] === null
-    && order['salad'] === null) {
-        return 'Выберите главное блюдо';
-    }
-
-    return '';
-}
-
-let notificationWindow = prepareNotification();
-
-function comboNotification() {
-    let message = getNotificationMessage();
-
-    if (message === '') {
-        return false;
-    }
-
-    let text
-    = document.getElementsByClassName('notification-message')[0];
-    console.log(text);
-    text.textContent = message;
-
-    notificationWindow.hidden = false;
-    console.log('show notification', message);
-    return true;
-}
-
-function submitOrder() {
-    for (let el in order) {
-        let value = document.getElementById(el + '-value');
-        if (order[el]) {
-            value.value = order[el].keyword;
-        } else {
-            value.value = '';
-        }
-    }
-    comboNotification();
-}
-
-function useFilter(event) {
-    
-}
 
 function activateFilters() {
     let filters = document.getElementsByClassName('filters');
@@ -246,7 +215,4 @@ function activateFilters() {
     }    
 }
 
-document.addEventListener("DOMContentLoaded", showDishes);
-document.getElementById('reset').onclick = () => resetOrder();
-document.getElementById('submit').onclick = () => submitOrder();
 activateFilters();
