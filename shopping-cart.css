@@ -1,0 +1,196 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px gray solid;
+    margin: px;
+}
+
+#logo-icon {
+    height: 50px;
+}
+
+#logo-icon img {
+    height: 100%;
+}
+
+#link-icons {
+    height: 50px;
+}
+
+#link-icons img {
+    height: 100%;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin: 0;
+    padding: 0 30px;
+}
+
+.message-panel {
+    display: flex;
+    justify-content: space-between;
+    border: 1px black solid;
+    background-color: lightgreen;
+    height: 50px;
+    padding-left: 20px;
+}
+
+.message-panel button{
+    height: 100%;
+    border: none;
+    background-color: transparent;
+}
+
+.message-panel button:hover{
+    cursor: pointer;
+}
+
+.message-panel img {
+    height: 100%;
+}
+
+#goods {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 100px;
+    justify-items: stretch;
+}
+
+.good-card {
+    display: flex;
+    flex-direction: column;
+    border: 2px transparent solid;
+    cursor: pointer;
+    filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
+    background-color: white;
+    padding: 30px 40px;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.form-buttons button {
+    width: 40%;
+    height: 30px;
+}
+
+.name {
+    flex-grow: 1;
+    margin-bottom: 0;
+}
+
+.good-card img {
+    height: 300px;
+    width: 300px;
+    align-self: center;
+}
+
+.old_price, .discount {
+    color: red;
+}
+
+.prices {
+    display: flex;
+    justify-content: space-around;
+}
+
+.form-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: stretch;
+    justify-content: space-around;
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 100px;
+    height: 500px;
+}
+
+.form-section h3 {
+    margin-bottom: 25px;
+}
+
+.form-section label {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.form-section input {
+    margin-top: 5px;
+    width: 80%;
+}
+
+.form-section select {
+    margin-top: 10px;
+    height: 35px;
+    width: 80%;
+}
+
+fieldset {
+    border: 0;
+}
+
+.form-section div input {
+    height: auto;
+    width: auto;
+}
+
+.form-section input, .form-section select{
+    height: 35px;
+    width: 100%;
+}
+
+.form-section textarea {
+    margin-top: 5px;
+    height: 30%;
+    width: 80%;
+}
+
+button {
+    background-color: lightslategrey;
+    color: white;
+    border: 0.5px black solid;
+    border-radius: 5px;
+    height: 35px;
+}
+
+.final-cost {
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.details {
+    margin-top: 0;
+    text-align: center;
+}
+
+footer {
+    margin: 0;
+    margin-top: auto;
+    border: 1px black solid;
+    text-align: center;
+    position: sticky;
+    bottom: 0;
+    background-color: white;
+}

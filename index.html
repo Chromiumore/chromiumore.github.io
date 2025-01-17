@@ -2,104 +2,85 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>О нас</title>
-    <link rel="stylesheet" href="style.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Главная страница</title>
 </head>
 <body>
     <header>
-        <h1>Food Construct</h1>
-        <nav>
-            <ul class="nav_line">
-                <li><a href="#about" class="active-link">О нас</a></li>
-                <li><a href="getlunch.html">Собрать ланч</a></li>
-                <li><a href="">Заказы</a></li>
-                <li><a href="#contacts">Контакты</a></li>
-            </ul>
-        </nav>
+        <img src="resources/icons/logo.png" alt="Logo" id="logo-icon">
+        <div id="search">
+            <input type="text">
+            <button>Найти</button>
+        </div>
+        <div id="link-icons">
+            <a href="shopping-cart.html"><img src="resources/icons/shopping-cart.png" alt="shopping cart"></a>
+            <a href="profile.html"><img src="resources/icons/user.png" alt="profile"></a>
+        </div>
     </header>
     <main>
-        <section id="about">
-            <figure class="food">
-                <img src="resources/food.jpg" alt="food image">
-            </figure>
-            <h2>О нас</h2>
-            <p>
-                <b>Food Construct</b> - доставка бизнес-ланчей в Москве.
-                Мы привезём вам горячую вкусную еду в любую точку города
-                к назначеному времени.
-            </p>
-        </section>
-
-        <section>
-            <h2>Преимущества Food Construct</h2>
-            <ul>
-                <li>Привозим обед к назначенному времени без опозданий</li>
-                <li>Надёжно упаковываем блюда в удобные контейнеры бесплатно</li>
-                <li>Доставляем ланчи весь день с 7:00 до 23:00</li>
-            </ul>    
-        </section>
-
-        <section>
-            <h2>Топ-5 популярных блюд</h2>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Название</th>
-                        <th>Кол-во заказов в неделю</th>
-                        <th>Цена</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Лазанья</td>
-                        <td>185</td>
-                        <td>385₽</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Том Ян с креветками</td>
-                        <td>161</td>
-                        <td>365₽</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Норвежский суп</td>
-                        <td>144</td>
-                        <td>270₽</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Жареная картошка с грибами</td>
-                        <td>132</td>
-                        <td>150₽</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Котлеты из курицы с картофельным пюре</td>
-                        <td>128</td>
-                        <td>225₽</td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </section>
+        <div>
+            <aside>
+                <h2>Категории</h2>
+                <section>
+                    <div>
+                        <input type="checkbox" name="category">
+                        <label for="category">Категория 1</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="category">
+                        <label for="category">Категория 2</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="category">
+                        <label for="category">Категория 3</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="category">
+                        <label for="category">Категория 4</label>
+                    </div>
+                </section>
+                <section>
+                    <h2>Стоимость</h2>
+                    <div id="price-filters">
+                        <div class="price-filter">
+                            <p>От</p>
+                            <input type="number">
+                        </div>
+                        <div class="price-filter">
+                            <p>До</p>
+                            <input type="number">
+                        </div>
+                    </div>
+                    <div class="block-only-discount">
+                        <input type="checkbox" name="only-discount">
+                        <label for="only-discount">Только товары со скдками</label>
+                    </div>
+                    <button>Применить</button>
+                </section>
+            </aside>
+            <section id="catalog">
+                <div id="catalog-top">
+                    <h1>Каталог</h1>
+                    <select name="sorting-catalog" id="sorting-catalog">
+                        <option value="">По убыванию рейтинга</option>
+                        <option value="">По возрастанию рейтинга</option>
+                        <option value="">По убыванию цены</option>
+                        <option value="">По возрастанию цены</option>
+                    </select>
+                </div>
+                <div id="goods">
+                <!-- Блоки с товарами -->
+                </div>
+                <!-- <div id="load-page">
+                    <button>Загрузить ещё</button>
+                </div> -->
+            </section>
+        </div>
     </main>
-    <footer id="contacts">
-            <p>Позвонить нам: <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" id="phone">+7-000-000-00-00</a></p>
+    <footer>
+        <p>© 2025 T-Electronics</p>
     </footer>
+    <script src="main.js"></script>
 </body>
 </html>

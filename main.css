@@ -1,0 +1,207 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px gray solid;
+}
+
+#logo-icon {
+    height: 50px;
+}
+
+#logo-icon img {
+    height: 100%;
+}
+
+#search{
+    width: 35%;
+    display: flex;
+    align-items: center;
+}
+
+#search input {
+    flex-grow: 1;
+    height: 50%;
+    margin-right: 5px
+}
+
+#search button {
+    height: 50%;
+    width: 70px;
+}
+
+#link-icons {
+    height: 50px;
+}
+
+#link-icons img {
+    height: 100%;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+main > div {
+    display: flex;
+}
+
+.message-panel {
+    display: flex;
+    justify-content: space-between;
+    border: 1px black solid;
+    background-color: lightgreen;
+    height: 50px;
+    padding-left: 20px;
+}
+
+.message-panel button{
+    height: 100%;
+    border: none;
+    background-color: transparent;
+}
+
+.message-panel button:hover{
+    cursor: pointer;
+}
+
+.message-panel img {
+    height: 100%;
+}
+
+aside {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px gray solid;
+    padding: 10px 40px 0 15px;
+}
+
+aside h2 {
+    margin: 0;
+    margin-top: 10px;
+}
+
+aside section div {
+    margin: 5px 0;
+}
+
+#price-filters {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+.price-filter{
+    width: 40%;
+    height: 25px;
+}
+
+.price-filter input {
+    width: 100%;
+    height: 100%;
+}
+
+.price-filter p {
+    margin: 0;
+}
+
+.block-only-discount {
+    margin-bottom: 20px;
+}
+
+aside button {
+    width: 100%;
+}
+
+#catalog {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+    padding: 0 40px;
+}
+
+#catalog-top {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+#sorting-catalog {
+    margin: 15px;
+    padding: 15px 30px;
+}
+
+#goods {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 100px;
+    justify-items: stretch;
+
+}
+
+.good-card {
+    display: flex;
+    flex-direction: column;
+    border: 2px transparent solid;
+    cursor: pointer;
+    filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
+    background-color: white;
+    padding: 30px 40px;
+}
+
+.name {
+    flex-grow: 1;
+    margin-bottom: 0;
+}
+
+.good-card img {
+    height: 300px;
+    width: 300px;
+    align-self: center;
+}
+
+.prices {
+    display: flex;
+    justify-content: space-around;
+}
+
+.old_price, .discount {
+    color: red;
+}
+
+footer {
+    margin: 0;
+    margin-top: auto;
+    border: 1px black solid;
+    text-align: center;
+    position: sticky;
+    bottom: 0;
+    background-color: white;
+}
+
+button {
+    background-color: lightslategrey;
+    color: white;
+    border: 0.5px black solid;
+    border-radius: 5px;
+    height: 35px;
+}
+
+.delete-buttons {
+    display: flex;
+    justify-content: center;
+}
